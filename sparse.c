@@ -1,0 +1,159 @@
+#include<stdio.h>
+void sparse(int a[][4],int b[][4],int r,int c);
+int main()
+{
+int A[10][10],B[10][10],k=0,d=0,a[10][4],b[10][4],i,j,m,n,r,c;
+printf("enter the number of rows and coloumns");
+scanf("%d%d",&r,&c);
+printf("enter the elements in first matrix");
+for(i=0;i<r;i++)
+{
+for(j=0;j<c;j++)
+{
+scanf("%d",&A[i][j]);
+}
+}
+printf("enter the elements in second matrix");
+for(i=0;i<r;i++)
+{
+        for(j=0;j<c;j++)
+        {
+        scanf("%d",&B[i][j]);
+        }
+}
+printf("sparse matrix of first matrix is");
+for(i=0;i<r;i++)
+{
+for(j=0;j<n;j++)
+{
+if(A[i][j]!=0)
+{
+k++;
+a[k][0]=i;
+a[k][1]=j;
+a[k][2]=A[i][j];
+}
+}
+}
+a[0][0]=r;
+a[0][1]=c;
+a[0][2]=k;
+for(i=0;i<r;i++)
+{
+        for(j=0;j<n;j++)
+        {
+        if(B[i][j]!=0)
+                {
+                d++;
+                b[d][0]=i;
+                b[d][1]=j;
+                b[d][2]=B[i][j];
+                }
+        }
+}
+b[0][0]=r;
+b[0][1]=c;
+b[0][2]=d;
+for(i=0;i<r;i++)
+{
+        for(j=0;j<c;j++)
+        {
+        printf("%d",a[i][j]);
+        }
+}
+for(i=0;i<r;i++)
+{
+        for(j=0;j<c;j++)
+        {
+        printf("%d",b[i][j]);
+        }
+}
+sparse(a,b,r,c);
+}
+void sparse(int x[10][4],int y[10][4],int r,int c)
+{
+int s[10][4],m,n,na,nb,h,g,k,i,j;
+m=x[0][0];
+n=x[0][1];
+h=y[0][0];
+g=y[0][1];
+na=x[0][2];
+nb=y[0][2];
+if(m==h && n==g)
+{
+printf("addition possible");
+while(i<na&&j<nb)
+{
+if(x[i][0]>y[j][0])
+{
+s[k][0]=x[i][0];
+s[k][1]=x[i][1];
+s[k][2]=x[i][2];
+i++;
+k++;
+}
+else  if(x[i][0]<y[j][0])
+{
+s[k][0]=y[j][0];
+s[k][1]=y[j][1];
+s[k][2]=y[j][2];
+j++;
+k++;
+}
+else
+{
+if(x[i][1]>y[j][1])
+{
+s[k][0]=x[i][0];
+s[k][1]=x[i][1];
+s[k][2]=x[i][2];
+k++;
+i++;
+}
+else if(x[i][1]<y[j][1])
+{
+s[k][0]=y[j][0];
+                s[k][1]=y[j][1];
+                s[k][2]=y[j][2];
+                k++;
+                j++;
+}
+else
+{
+s[k][0]=x[i][0];
+s[k][1]=x[i][1];
+s[k][2]=x[i][2]+y[j][2];
+k++;
+j++;
+i++;
+}
+}
+}
+while(i<na)
+{
+s[k][0]=x[i][0];
+        s[k][1]=x[i][1];
+        s[k][2]=x[i][2];
+        k++;
+        i++;
+        }
+while(j<nb)
+{
+s[k][0]=y[j][0];
+s[k][1]=y[j][1];
+s[k][2]=y[j][2];
+k++;
+j++;
+}
+s[0][0]=x[0][0];
+s[0][1]=x[0][1];
+s[0][2]=k;
+
+for(i=0;i<k;i++)
+{
+for(j=0;j<=3;j++)
+{
+printf("%d \t",s[i][j]);
+}
+printf("\n");
+}}}
